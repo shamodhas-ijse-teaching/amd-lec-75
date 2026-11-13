@@ -1,51 +1,17 @@
-import { View, Text, TouchableOpacity } from "react-native"
-import React from "react"
-import { Link, Slot, Stack, Tabs, useRouter } from "expo-router"
-import MaterialIcon from "@react-native-vector-icons/material-icons"
+import { AuthProvider } from "@/context/AuthContext"
+import { LoaderProvider } from "@/context/LoaderContext"
+import { Slot } from "expo-router"
+import { SafeAreaView } from "react-native-safe-area-context"
 
 const RootLayout = () => {
   return (
-    <Tabs screenOptions={{ headerShown: false }}>
-      <Tabs.Screen
-        name="index"
-        options={{
-          title: "Home",
-          tabBarIcon: ({ color, focused, size }) => (
-            <MaterialIcon
-              name={focused ? "home-work" : "home"}
-              color={color}
-              size={size}
-            />
-          )
-        }}
-      />
-      <Tabs.Screen
-        name="about"
-        options={{
-          title: "About",
-          tabBarIcon: ({ color, focused, size }) => (
-            <MaterialIcon
-              name={focused ? "airline-seat-flat-angled" : "airline-seat-flat"}
-              color={color}
-              size={size}
-            />
-          )
-        }}
-      />
-      <Tabs.Screen
-        name="me"
-        options={{
-          title: "Me",
-          tabBarIcon: ({ color, focused, size }) => (
-            <MaterialIcon
-              name={focused ? "accessible" : "accessibility"}
-              color={color}
-              size={size}
-            />
-          )
-        }}
-      />
-    </Tabs>
+    <LoaderProvider>
+      <AuthProvider>
+        <SafeAreaView className="flex-1">
+          <Slot />
+        </SafeAreaView>
+      </AuthProvider>
+    </LoaderProvider>
   )
 }
 
